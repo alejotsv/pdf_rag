@@ -1,0 +1,7 @@
+# Ignore PDF data and generated embeddings
+data/
+*.pkl
+*.db
+*.json
+__pycache__/
+.env
