@@ -1,2 +1,31 @@
-# pdf_rag
-A lightweight Retrieval-Augmented Generation (RAG) chatbot that reads local PDF files, accepts text or image-based questions, and returns accurate answers with references to the source documents.
+# PDF RAG
+
+PDF RAG is a lightweight Retrieval-Augmented Generation (RAG) chatbot designed to answer questions based on the content of local PDF files. It accepts both **text** and **screenshot images containing text** as input, retrieves the most relevant information from the PDFs, and responds with the **answer** along with the **source document reference**.
+
+## 🚀 Features
+
+- 📄 Load and index multiple local PDF files
+- 🔍 Semantic search using vector embeddings
+- 🤖 Simple chatbot interface
+- 🧠 Answer questions from:
+  - Text input
+  - Screenshots (image-to-text OCR)
+- 📚 Provides source document reference for transparency
+
+## 🛠️ Tech Stack
+
+- Python 3
+- [Sentence Transformers](https://www.sbert.net/) for embeddings
+- [Chroma](https://www.trychroma.com/) or FAISS for vector search
+- [Flask](https://flask.palletsprojects.com/) or FastAPI for serving
+- [PyMuPDF](https://pymupdf.readthedocs.io/) for PDF parsing
+- [Tesseract OCR](https://github.com/tesseract-ocr/tesseract) for image-to-text (screenshot support)
+- Optional: Local LLM (via `llama.cpp`) for natural responses
+
+## 🧑‍💻 Project Setup
+
+### Clone the repository
+
+```bash
+git clone https://github.com/your-username/pdf-rag.git
+cd pdf-rag
