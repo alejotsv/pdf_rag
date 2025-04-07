@@ -6,3 +6,7 @@ data/
 __pycache__/
 .env
 .idea/
+# Exclude everything in storage/
+storage/*
+# But keep the folder itself
+!storage/.gitkeep
