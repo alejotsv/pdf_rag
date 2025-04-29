@@ -1,7 +1,5 @@
 import spacy
-import chromadb
 from chromadb import PersistentClient
-from chromadb.config import Settings
 from docs_parser import parse_all_pdfs
 
 nlp = spacy.load("en_core_web_md")
@@ -12,12 +10,16 @@ collection = chroma_client.get_or_create_collection(name="pdf_chunks")
 
 def embed_and_store_chunks():
     chunks = parse_all_pdfs()
-    print(f"Embedding {len(chunks)} chunks...")
+    print(f"\n✅ Total chunks parsed: {len(chunks)}")
 
     for i, (text, metadata) in enumerate(chunks):
+        if not text.strip():
+            print(f"⚠️ Empty chunk at index {i} (page {metadata['page']} in {metadata['source']})")
+            continue
+
         doc_id = f"{metadata['source']}_p{metadata['page']}_c{i}"
         doc = nlp(text)
-        embedding = doc.vector.tolist()  # SpaCy uses numpy arrays
+        embedding = doc.vector.tolist()
 
         collection.add(
             documents=[text],
@@ -26,7 +28,10 @@ def embed_and_store_chunks():
             embeddings=[embedding]
         )
 
-    print("Embeddings stored successfully.")
+    print("\n🎉 Embeddings stored successfully.")
 
 def load_collection():
     return chroma_client.get_collection(name="pdf_chunks")
+
+if __name__ == "__main__":
+    embed_and_store_chunks()
